@@ -1,0 +1,41 @@
+server:
+  port: 8200
+
+cors:
+  originPatterns: http://localhost:3000,http://localhost:4201,http://localhost:8080, http://www.adrianomenezes.com
+file:
+  upload-dir: /code/upload
+security:
+  jwt:
+    token:
+      secret-key: minhamaemandoueuescolherestedaqui
+      expire-lenght: 3600000
+    
+spring:
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://localhost:3310/general?useSSL=false&allowPublicKeyRetrieval=true&useTimezone=true&serverTimezone=UTC
+    username: root
+    password: admin123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    show_sql: true
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 200MB
+      max-request-size: 215MB
+      
+springdoc:
+  pathsToMatch:
+    - /auth/** 
+    - /api/**/v1/**
+  swagger-ui:
+    use-root-path: true
