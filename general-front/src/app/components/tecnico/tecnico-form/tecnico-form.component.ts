@@ -64,7 +64,7 @@ export class TecnicoFormComponent implements OnInit, OnChanges {
   // }
   
   ngOnInit() {
-    console.log(this.action);
+    // console.log(this.action);
     if (this.action === 'update' || this.action === 'delete') {
       this.tecnico.id = this.route.snapshot.paramMap.get('id');
       this.findById();
@@ -74,14 +74,14 @@ export class TecnicoFormComponent implements OnInit, OnChanges {
   ngOnChanges() {
     if (this.tipoAcao === 'create' || this.tipoAcao === 'update' || this.tipoAcao === 'delete'){
       this.action = this.tipoAcao;
-      this.disable_component = false;
+      this.disable_component = true;
       if (this.tipoAcao === 'create') {
         this.cabec = 'Cadastrar ';
       } else if (this.tipoAcao === 'update') {
         this.cabec = 'Alterar ';
       } else if (this.tipoAcao === 'delete') {
         this.cabec = 'Deletar ';
-        this.disable_component = true;
+        this.disable_component = false;
       }
       // alert(this.tipoAcao);
     }
@@ -187,7 +187,7 @@ export class TecnicoFormComponent implements OnInit, OnChanges {
             && this.vcpf.valid
             && this.vemail.valid
             && this.vaddress.valid
-            && this.vsenha.valid
+            && this.vsenha.valid || this.action === 'delete';
   }
 
   desabilitaCampos(): boolean {
