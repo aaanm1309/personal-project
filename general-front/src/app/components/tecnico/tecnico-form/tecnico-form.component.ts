@@ -43,21 +43,21 @@ export class TecnicoFormComponent implements OnInit, OnChanges {
 
   action: string;
   cabec: string;
-  disable_component: boolean = false;
+  enable_component: boolean = false;
 
   @Input() public tipoAcao: string ; 
   //
   // set tipoAcao(tipoAcao: string) {
   //   if (tipoAcao === 'create' || tipoAcao === 'update' || tipoAcao === 'delete'){
   //     this.action = tipoAcao;
-  //     this.disable_component = false;
+  //     this.enable_component = false;
   //     if (tipoAcao === 'create') {
   //       this.cabec = 'Cadastrar ';
   //     } else if (tipoAcao === 'update') {
   //       this.cabec = 'Alterar ';
   //     } else if (tipoAcao === 'delete') {
   //       this.cabec = 'Deletar ';
-  //       this.disable_component = true;
+  //       this.enable_component = true;
   //     }
 
   //   }
@@ -74,14 +74,14 @@ export class TecnicoFormComponent implements OnInit, OnChanges {
   ngOnChanges() {
     if (this.tipoAcao === 'create' || this.tipoAcao === 'update' || this.tipoAcao === 'delete'){
       this.action = this.tipoAcao;
-      this.disable_component = true;
+      this.enable_component = true;
       if (this.tipoAcao === 'create') {
         this.cabec = 'Cadastrar ';
       } else if (this.tipoAcao === 'update') {
         this.cabec = 'Alterar ';
       } else if (this.tipoAcao === 'delete') {
         this.cabec = 'Deletar ';
-        this.disable_component = false;
+        this.enable_component = false;
       }
       // alert(this.tipoAcao);
     }
@@ -91,7 +91,7 @@ export class TecnicoFormComponent implements OnInit, OnChanges {
     this.service.findById(this.tecnico.id).subscribe(resp => this.tecnico = resp);
   }
 
-  save() : void {
+  actionButton() : void {
     if (this.action == 'create') {
         this.create();
     } else  if (this.tipoAcao === 'update') {
@@ -191,7 +191,7 @@ export class TecnicoFormComponent implements OnInit, OnChanges {
   }
 
   desabilitaCampos(): boolean {
-    return this.disable_component
+    return this.enable_component
   }
 
 }

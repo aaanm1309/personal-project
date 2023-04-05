@@ -43,6 +43,7 @@ import { NgxMaskDirective, NgxMaskPipe, provideEnvironmentNgxMask, provideNgxMas
 import { TecnicoUpdateComponent } from './components/tecnico/tecnico-update/tecnico-update.component';
 import { TecnicoFormComponent } from './components/tecnico/tecnico-form/tecnico-form.component';
 import { TecnicoDeleteComponent } from './components/tecnico/tecnico-delete/tecnico-delete.component';
+import { TaskModule } from './modules/task/task.module';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,12 @@ import { TecnicoDeleteComponent } from './components/tecnico/tecnico-delete/tecn
           timeOut: 4000,
           closeButton: true,
           progressBar: true
-        }), NgxMaskDirective, NgxMaskPipe
+        }), 
+        NgxMaskDirective, 
+        NgxMaskPipe,
+
+        // Personal Modules
+        TaskModule
   ],
   providers: [ AuthInterceptorProvider , provideNgxMask()],
   bootstrap: [AppComponent]

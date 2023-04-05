@@ -64,6 +64,10 @@ public class User implements UserDetails ,Serializable{
 	}
 	
 	public User() {}
+
+	public User(Long id) {
+		this.id = id;
+	}
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

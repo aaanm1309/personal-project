@@ -1,4 +1,4 @@
-<form action="" class="form">
+<form action="" class="form" [ngSwitch]="enable_component">
     <h1 class="fullWidth">{{cabec}} Técnico</h1>
     <img class="fullWidth" src="assets/img/tecnico-create.svg" alt="{{cabec}} Técnico">
 
@@ -7,22 +7,16 @@
         <mat-checkbox (click)="addPerfil(1)" class="margin" color="primary">Cliente</mat-checkbox>
         <mat-checkbox (click)="addPerfil(2)" class="margin" color="primary">Técnico</mat-checkbox>
     </section>
-    
-    <mat-form-field class="fullWidth" *ngIf="disable_component" >
+    <mat-form-field class="fullWidth" >
         <mat-label>Primeiro Nome</mat-label>
-        <input
+        <input *ngSwitchCase="true"
             [(ngModel)]="tecnico.firstName"
             name="firstName"
             [formControl]="vfirstName" 
             required
             matInput placeholder="Ex... Fulano"
             maxlength="40">
-        <mat-icon matSuffix>person</mat-icon>
-        <mat-hint>Insira o nome do Técnico</mat-hint>
-    </mat-form-field>
-    <mat-form-field class="fullWidth" *ngIf="!disable_component" >
-        <mat-label>Primeiro Nome</mat-label>
-        <input
+        <input *ngSwitchCase="false"
             [disabled]="true"
             [(ngModel)]="tecnico.firstName"
             name="firstName"
@@ -31,20 +25,16 @@
         <mat-hint>Insira o nome do Técnico</mat-hint>
     </mat-form-field>
 
-    <mat-form-field class="fullWidth" *ngIf="disable_component">
+    <mat-form-field class="fullWidth" >
         <mat-label>Sobrenome</mat-label>
-        <input 
+        <input *ngSwitchCase="true"
             [(ngModel)]="tecnico.lastName"
             name="lastName"
             [formControl]="vlastName" 
             required
             matInput placeholder="Ex.. Silva"
             maxlength="40">
-        <mat-icon matSuffix>diversity_3</mat-icon>
-    </mat-form-field>
-    <mat-form-field class="fullWidth" *ngIf="!disable_component">
-        <mat-label>Sobrenome</mat-label>
-        <input 
+        <input *ngSwitchCase="false"
             [disabled]="true"
             [(ngModel)]="tecnico.lastName"
             name="lastName"
@@ -52,20 +42,16 @@
         <mat-icon matSuffix>diversity_3</mat-icon>
     </mat-form-field>
 
-    <mat-form-field class="fullWidth" *ngIf="disable_component">
+    <mat-form-field class="fullWidth" >
         <mat-label>CPF</mat-label>
-        <input 
+        <input *ngSwitchCase="true"
             [(ngModel)]="tecnico.cpf"
             name="cpf"
             [formControl]="vcpf" 
             required
             matInput placeholder="Ex.. 000.000.000-00"
             mask="000.000.000-00">
-        <mat-icon matSuffix>pin</mat-icon>
-    </mat-form-field>
-    <mat-form-field class="fullWidth" *ngIf="!disable_component">
-        <mat-label>CPF Clone</mat-label>
-        <input 
+        <input *ngSwitchCase="false"
             [disabled]="true"
             [(ngModel)]="tecnico.cpf"
             name="cpf"
@@ -74,19 +60,16 @@
         <mat-icon matSuffix>pin</mat-icon>
     </mat-form-field>
 
-    <mat-form-field class="fullWidth" *ngIf="disable_component">
+
+    <mat-form-field class="fullWidth" >
         <mat-label>E-mail</mat-label>
-        <input 
+        <input *ngSwitchCase="true"
             [(ngModel)]="tecnico.email"
             name="email"
             [formControl]="vemail" 
             required
             type="email" matInput placeholder="Ex.. fulano@mail.com">
-        <mat-icon matSuffix>email</mat-icon>
-    </mat-form-field>
-    <mat-form-field class="fullWidth" *ngIf="!disable_component">
-        <mat-label>E-mail Clone</mat-label>
-        <input 
+        <input *ngSwitchCase="false"
             [disabled]="true"
             [(ngModel)]="tecnico.email"
             name="email"
@@ -94,26 +77,23 @@
         <mat-icon matSuffix>email</mat-icon>
     </mat-form-field>
 
-    <mat-form-field class="fullWidth" *ngIf="disable_component">
+    <mat-form-field class="fullWidth" >
         <mat-label>Endereço</mat-label>
-        <input 
+        <input *ngSwitchCase="true"
             [(ngModel)]="tecnico.address"
             name="address"
             [formControl]="vaddress" 
             required
             matInput placeholder="Ex.. Rua de tal, 1">
-        <mat-icon matSuffix>home</mat-icon>
-    </mat-form-field>
-    <mat-form-field class="fullWidth" *ngIf="!disable_component">
-        <mat-label>Endereço</mat-label>
-        <input 
-            disabled]="true"
+        <input *ngSwitchCase="false"
+            [disabled]="true"
             [(ngModel)]="tecnico.address"
             name="address"
             matInput >
         <mat-icon matSuffix>home</mat-icon>
     </mat-form-field>
-    <mat-form-field class="fullWidth" *ngIf="disable_component">
+
+    <mat-form-field class="fullWidth" *ngSwitchCase="true">
         <mat-label>Senha</mat-label>
         <input 
             [(ngModel)]="tecnico.password"
@@ -124,7 +104,7 @@
         <mat-icon matSuffix>password</mat-icon>
     </mat-form-field>
 
-    <button  (click)="save()"  [disabled]="!validaCampos()" class="fullWidth mat-elevation-z4" mat-flat-button color="primary">{{cabec}}</button>
+    <button  (click)="actionButton()"  [disabled]="!validaCampos()" class="fullWidth mat-elevation-z4" mat-flat-button color="primary">{{cabec}}</button>
     <button routerLink="/tecnicos" class="fullWidth mat-elevation-z4" mat-stroked-button color="warn">Cancelar</button>
 
     <p>By Adriano Menezes</p>
