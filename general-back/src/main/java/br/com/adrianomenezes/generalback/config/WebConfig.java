@@ -15,8 +15,7 @@ import br.com.adrianomenezes.generalback.serialization.converter.YamlJacksonToHt
 @Configuration
 public class WebConfig implements WebMvcConfigurer{
 	private static final MediaType MEDIA_TYPE_APPLICATION_YML = MediaType.valueOf("application/x-yaml");
-	
-	
+
 	@Value("${cors.originPatterns:default}")
 	private String corsOriginPatterns = "";
 	
@@ -56,7 +55,5 @@ public class WebConfig implements WebMvcConfigurer{
 				.allowCredentials(true);
 		
 	}
-	
-	
 
 }

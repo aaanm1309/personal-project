@@ -5,6 +5,7 @@ import { TaskButtonDeleteAllComponent } from './components/task-button-delete-al
 import { TaskInputAddItensComponent } from './components/task-input-add-itens/task-input-add-itens.component';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { TaskComponent } from './pages/task/task.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -17,7 +18,9 @@ import { TaskComponent } from './pages/task/task.component';
     TaskComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    // Forms
+    FormsModule
   ]
 })
 export class TaskModule { }

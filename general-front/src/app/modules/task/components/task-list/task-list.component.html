@@ -1,1 +1,18 @@
-<p>task-list works!</p>
+<section [ngClass]="{'loading': !taskList.length}">
+    <ul *ngIf="taskList.length">
+        <li *ngFor="let item of taskList;let i = index">
+            <input type="checkbox" [(ngModel)]="item.checked" name="item.checked" id="">
+            <input type="text" 
+                [(ngModel)]="item.taskName" 
+                name="item.taskName" id="">
+
+            <button>
+                <img src="assets/icons/icon-trash.svg" alt="">
+            </button>
+        </li>
+
+    </ul>
+</section>
+
+<app-task-input-add-itens></app-task-input-add-itens>
+<app-task-button-delete-all *ngIf="taskList.length"></app-task-button-delete-all>

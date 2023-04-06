@@ -1,5 +1,6 @@
 package br.com.adrianomenezes.generalback.controllers;
 
+import br.com.adrianomenezes.generalback.data.vo.v1.TaskMinVO;
 import br.com.adrianomenezes.generalback.data.vo.v1.TaskVO;
 import br.com.adrianomenezes.generalback.data.vo.v1.TechnicianVO;
 import br.com.adrianomenezes.generalback.model.Task;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -52,6 +54,16 @@ public class TaskController {
 		User user = new User(userId);
 		List<TaskVO> listDTO = service.findAllByUser(user);
 		return ResponseEntity.ok().body(listDTO);
+	}
+
+	@GetMapping(value = "/user/{userId}/min")
+	public ResponseEntity<List<TaskMinVO>> findAllByUserMin(@PathVariable Long userId) {
+		User user = new User(userId);
+		List<TaskVO> listDTO = service.findAllByUser(user);
+		List<TaskMinVO> listMinDTO = new ArrayList<>();
+
+		listDTO.stream().forEach(x -> listMinDTO.add(new TaskMinVO(x)) );
+		return ResponseEntity.ok().body(listMinDTO);
 	}
 
 
