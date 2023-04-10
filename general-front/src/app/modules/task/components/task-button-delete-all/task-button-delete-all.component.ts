@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-task-button-delete-all',
@@ -6,5 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./task-button-delete-all.component.css']
 })
 export class TaskButtonDeleteAllComponent {
+  @Output() public emmitDeleteAllTaskList = new EventEmitter();
+
+  constructor(){}
+
+  ngOnInit() {}
+
+  submitDeleteAllTaskList(){
+      this.emmitDeleteAllTaskList.emit();
+  }
+
 
 }

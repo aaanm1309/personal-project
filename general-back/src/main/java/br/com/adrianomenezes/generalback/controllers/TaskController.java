@@ -9,6 +9,7 @@ import br.com.adrianomenezes.generalback.model.User;
 import br.com.adrianomenezes.generalback.services.TaskService;
 import br.com.adrianomenezes.generalback.services.TechnicianService;
 import br.com.adrianomenezes.generalback.services.UserService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -67,7 +68,7 @@ public class TaskController {
 	}
 
 
-	@PreAuthorize("hasAnyRole('ADMIN')")
+//	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping
 	public ResponseEntity<TaskVO> create(@Valid @RequestBody TaskVO objDTO) {
 		TaskVO newObj = service.create(objDTO);
@@ -92,6 +93,7 @@ public class TaskController {
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping(value = "/user/{userId}")
+	@Transactional
 	public ResponseEntity<TaskVO> deleteAllByUser(@PathVariable Long userId) {
 		User user = new User(userId);
 		service.deleteAllyByUser(user);

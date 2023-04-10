@@ -11,7 +11,8 @@ public class TokenVO implements Serializable {
 
 
 	private static final long serialVersionUID = 1L;
-	
+
+	private Long userId;
 	private String username;
 	private Boolean authenticated;
 	private Date created;
@@ -34,6 +35,24 @@ public class TokenVO implements Serializable {
 		this.expiration = expiration;
 		this.accessToken = accessToken;
 		this.refreshToken = refreshToken;
+	}
+
+	public TokenVO(Long userId, String username, Boolean authenticated, Date created, Date expiration, String accessToken, String refreshToken) {
+		this.userId = userId;
+		this.username = username;
+		this.authenticated = authenticated;
+		this.created = created;
+		this.expiration = expiration;
+		this.accessToken = accessToken;
+		this.refreshToken = refreshToken;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	public String getUsername() {
@@ -85,27 +104,14 @@ public class TokenVO implements Serializable {
 	}
 
 	@Override
-	public int hashCode() {
-		return Objects.hash(accessToken, authenticated, created, expiration, refreshToken, username);
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof TokenVO tokenVO)) return false;
+		return Objects.equals(getUserId(), tokenVO.getUserId()) && Objects.equals(getUsername(), tokenVO.getUsername()) && Objects.equals(getAuthenticated(), tokenVO.getAuthenticated()) && Objects.equals(getCreated(), tokenVO.getCreated()) && Objects.equals(getExpiration(), tokenVO.getExpiration()) && Objects.equals(getAccessToken(), tokenVO.getAccessToken()) && Objects.equals(getRefreshToken(), tokenVO.getRefreshToken());
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		TokenVO other = (TokenVO) obj;
-		return Objects.equals(accessToken, other.accessToken) && Objects.equals(authenticated, other.authenticated)
-				&& Objects.equals(created, other.created) && Objects.equals(expiration, other.expiration)
-				&& Objects.equals(refreshToken, other.refreshToken) && Objects.equals(username, other.username);
+	public int hashCode() {
+		return Objects.hash(getUserId(), getUsername(), getAuthenticated(), getCreated(), getExpiration(), getAccessToken(), getRefreshToken());
 	}
-	
-	
-
-	
-	
-
 }

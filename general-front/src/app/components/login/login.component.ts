@@ -33,7 +33,7 @@ export class LoginComponent {
         private router: Router) {}
 
   ngOnInit(): void {
-    // this.service.logOut() ;
+    this.service.logOut() ;
   }
 
   logar() {
@@ -42,13 +42,16 @@ export class LoginComponent {
     this.service.authenticate(this.credsVO).subscribe (
       resposta => {
         this.credRet  = resposta.body;
-        this.service.sucessfullyLoggedIn(this.credRet.accessToken, this.credRet.refreshToken)
+        // console.log(this.credRet);
+        this.service.sucessfullyLoggedIn(this.credRet.accessToken, this.credRet.refreshToken, this.credRet.userId)
         this.router.navigate(['home'])
 
-      }, () => {
+      }, (error) => {
                 this.toast.error('Usuario e/ou senha inválidos', 'Login')
+                console.error(error.error.message);
                 this.service.logOut() 
               }
+              
     )
 
     

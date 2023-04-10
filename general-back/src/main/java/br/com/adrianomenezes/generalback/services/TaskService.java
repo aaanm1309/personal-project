@@ -91,7 +91,7 @@ public class TaskService {
 
 	public TaskVO create(@Valid TaskVO objDTO) {
 		objDTO.setKey(null);
-
+		objDTO.setEnabled(false);
 		Task newObj = new Task(objDTO);
 		try {
 			return new TaskVO(repository.save(newObj));
@@ -119,7 +119,7 @@ public class TaskService {
 	}
 
 	public void deleteAllyByUser(User user) {
-		System.out.println(user.getPermissions());
+//		System.out.println(user.getPermissions());
 		repository.deleteAllByUser(user);
 	}
 

@@ -20,15 +20,15 @@ public class TaskMinVO extends RepresentationModel<TaskMinVO> implements Seriali
 	private static final long serialVersionUID = 1L;
 
 
-    @NotNull(message = "The field taskName is required")
+    private Long key;
 	private String taskName;
-
 	private Boolean checked ;
 
 	public TaskMinVO() {
 	}
 
-    public TaskMinVO(String taskName, Boolean checked) {
+    public TaskMinVO(Long key, String taskName, Boolean checked) {
+        this.key = key;
         this.taskName = taskName;
         this.checked = checked;
     }
@@ -36,6 +36,15 @@ public class TaskMinVO extends RepresentationModel<TaskMinVO> implements Seriali
     public TaskMinVO(TaskVO task) {
         this.taskName = task.getTaskName();
         this.checked = task.getEnabled();
+        this.key = task.getKey();
+    }
+
+    public Long getKey() {
+        return key;
+    }
+
+    public void setKey(Long key) {
+        this.key = key;
     }
 
     public String getTaskName() {
@@ -59,11 +68,11 @@ public class TaskMinVO extends RepresentationModel<TaskMinVO> implements Seriali
         if (this == o) return true;
         if (!(o instanceof TaskMinVO taskMinVO)) return false;
         if (!super.equals(o)) return false;
-        return Objects.equals(getTaskName(), taskMinVO.getTaskName()) && Objects.equals(getChecked(), taskMinVO.getChecked());
+        return Objects.equals(getKey(), taskMinVO.getKey()) && Objects.equals(getTaskName(), taskMinVO.getTaskName()) && Objects.equals(getChecked(), taskMinVO.getChecked());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getTaskName(), getChecked());
+        return Objects.hash(super.hashCode(), getKey(), getTaskName(), getChecked());
     }
 }

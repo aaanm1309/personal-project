@@ -4,6 +4,8 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
+import br.com.adrianomenezes.generalback.model.User;
+import br.com.adrianomenezes.generalback.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,6 +36,9 @@ public class JwtTokenProvider {
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
+
+	@Autowired
+	private UserRepository repository;
 	
 	Algorithm algorithm = null; 
 	
@@ -49,8 +54,9 @@ public class JwtTokenProvider {
 		Date validity = new Date(now.getTime()+expireLenght);
 		var accessToken = getAccessToken(username, roles, now, validity);
 		var refreshToken = getRefreshToken(username, roles, now);
-		
-		return new TokenVO(username, true, now, validity, accessToken, refreshToken);
+		User user = repository.findByUsername(username);
+
+		return new TokenVO(user.getId(), username, true, now, validity, accessToken, refreshToken);
 	}
 	
 	public TokenVO refreshToken(String refreshToken) {
